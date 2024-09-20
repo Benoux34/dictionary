@@ -1,6 +1,6 @@
 "use client";
 
-import React, { Dispatch, SetStateAction } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { onSubmit } from "./utils";
@@ -13,8 +13,18 @@ const Form = ({
   setApiResponse: Dispatch<SetStateAction<GetWord | undefined>>;
 }) => {
   const { toast } = useToast();
+  const [error, setError] = useState<boolean>(false);
 
-  const HandleSubmit = onSubmit(toast, setApiResponse);
+  const HandleSubmit = onSubmit(setApiResponse, setError);
+
+  useEffect(() => {
+    if (error) {
+      toast({
+        variant: "destructive",
+        description: "There was a problem with your word.",
+      });
+    }
+  }, [error]);
 
   return (
     <form onSubmit={HandleSubmit} className="flex items-center gap-3">

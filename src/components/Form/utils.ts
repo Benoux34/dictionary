@@ -4,8 +4,8 @@ import { Dispatch, FormEventHandler, SetStateAction } from "react";
 
 const onSubmit =
   (
-    toast: any,
-    setApiResponse: Dispatch<SetStateAction<GetWord | undefined>>
+    setApiResponse: Dispatch<SetStateAction<GetWord | undefined>>,
+    setError: Dispatch<SetStateAction<boolean>>
   ): FormEventHandler<HTMLFormElement> | undefined =>
   async (e) => {
     e.preventDefault();
@@ -14,7 +14,7 @@ const onSubmit =
 
     const word = formData.get("word") as string;
 
-    if (word) setApiResponse(await getWordAxios(word, toast));
+    if (word) setApiResponse(await getWordAxios(word, setError));
   };
 
 export { onSubmit };

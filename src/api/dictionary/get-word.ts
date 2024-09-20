@@ -1,17 +1,19 @@
 import { AxiosInstance } from "axios";
 import { GetWord } from "./entities";
+import { Dispatch, SetStateAction } from "react";
 
 const getWord =
   (axios: AxiosInstance) =>
-  async (word: string, toast: any): Promise<GetWord | undefined> => {
+  async (
+    word: string,
+    setError: Dispatch<SetStateAction<boolean>>
+  ): Promise<GetWord | undefined> => {
     try {
       const result = await axios.get<GetWord>(`/entries/en/${word}`);
+      setError(false);
       return result.data;
     } catch {
-      toast({
-        variant: "destructive",
-        description: "There was a problem with your word.",
-      });
+      setError(true);
     }
   };
 
