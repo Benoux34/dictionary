@@ -48,7 +48,10 @@ const Audio = ({ data }: { data: Phonetics }) => {
           </PopoverTrigger>
           <PopoverContent className="w-full m-2">
             {audio.map((d) => (
-              <div className="flex items-center gap-x-2 text-blue-500">
+              <div
+                key={d.text}
+                className="flex items-center gap-x-2 text-blue-500"
+              >
                 <p>{d.text}</p>
                 <Play
                   className="h-5 w-5 cursor-pointer"

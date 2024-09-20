@@ -35,7 +35,7 @@ export default function Home() {
 
             {data.meanings &&
               data.meanings.map((d) => (
-                <div className="mb-8">
+                <div key={d.partOfSpeech} className="mb-8">
                   <div className="w-full flex items-center gap-x-5 mb-4">
                     <h2 className="w-[20%] text-lg font-semibold">
                       {d.partOfSpeech}
@@ -77,7 +77,7 @@ export default function Home() {
               ))}
             {data.sourceUrls &&
               data.sourceUrls.map((url) => (
-                <div className="mb-2">
+                <div key={url} className="mb-2">
                   <Separator className="my-4" />
                   <div>
                     <h3 className="text-gray-500 mb-4">
